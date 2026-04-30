@@ -1,66 +1,25 @@
 public class Roman {
 
      public int romanToInt(String s) {
-        int i = 0;
-        int res = 0;
-        int nextSym = 0;
+         int answer = 0, number = 0, prev = 0;
 
-        while (i < s.length()) {
-            char letter = s.charAt(i);
-            switch (letter) {
-                case 'I':
-                    nextSym = i + 1;
-                    if (nextSym < s.length() && s.charAt(nextSym) == 'V') {
-                        res += 4;
-                        i++;
-                    } else if (nextSym < s.length() && s.charAt(nextSym) == 'X') {
-                        res += 9;
-                        i++;
-                    } else {
-                        res++;
-                    }
-                    break;
-                case 'V':
-                    res += 5;
-                    break;
-                case 'X':
-                    nextSym = i + 1;
-                    if (nextSym < s.length() && s.charAt(nextSym) == 'L') {
-                        res += 40;
-                        i++;
-                    } else if (nextSym < s.length() && s.charAt(nextSym) == 'C') {
-                        res += 90;
-                        i++;
-                    } else {
-                        res += 10;
-                    }
-                    break;
-                case 'L':
-                    res += 50;
-                    break;
-                case 'C':
-                    nextSym = i + 1;
-                    if (nextSym < s.length() && s.charAt(nextSym) == 'D') {
-                        res += 400;
-                        i++;
-                    } else if (nextSym < s.length() && s.charAt(nextSym) == 'M') {
-                        res += 900;
-                        i++;
-                    } else {
-                        res += 100;
-                    }
-                    break;
-                case 'D':
-                    res += 500;
-                    break;
-                case 'M':
-                    res += 1000;
-                    break;
-                default:
-                    break;
-            }
-            i++;
-        }
-        return res;
+         for (int j = s.length() - 1; j >= 0; j--) {
+             switch (s.charAt(j)) {
+                 case 'M' -> number = 1000;
+                 case 'D' -> number = 500;
+                 case 'C' -> number = 100;
+                 case 'L' -> number = 50;
+                 case 'X' -> number = 10;
+                 case 'V' -> number = 5;
+                 case 'I' -> number = 1;
+             }
+             if (number < prev) {
+                 answer -= number;
+             } else {
+                 answer += number;
+             }
+             prev = number;
+         }
+         return answer;
     }
 }
